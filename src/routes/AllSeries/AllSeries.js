@@ -1,14 +1,14 @@
-import './AllMovies.css';
+import './AllSeries.css';
 import Nav from '../../Components/Nav/Nav';
 import key from '../../key';
 import { useEffect, useState, useRef } from 'react';
 import Modal from '../../Components/Modal/Modal';
 import Footer from '../../Components/Footer/Footer';
 
-function AllMovies(){
+function AllSeries(){
 
     const [count, setCount] = useState(1);
-    const [movieData, setMovieData] = useState();
+    const [seriesData, setSeriesData] = useState();
     const [loading, setLoading] = useState(true);
 
     //modal
@@ -16,7 +16,7 @@ function AllMovies(){
     const [modalData, setModalData] = useState();
 
     useEffect(() => {
-        getMovieList();
+        getSeriesList();
     }, [count])
 
     const modalClose = () => {
@@ -29,25 +29,25 @@ function AllMovies(){
         document.body.style.overflowY = '';
     }
 
-    const getMovieList = async() => {
-        if(!movieData){
-            await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${count}&with_watch_monetization_types=flatrate`)
+    const getSeriesList = async() => {
+        if(!seriesData){
+            await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${count}&with_watch_monetization_types=flatrate`)
             .then(function(response){
                 return response.json();
             })
             .then(function(response){
-                setMovieData(response.results);
+                setSeriesData(response.results);
                 setLoading(false);
             })
-        } else if(movieData){
-            await fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${count}&with_watch_monetization_types=flatrate`)
+        } else if(seriesData){
+            await fetch(`https://api.themoviedb.org/3/discover/tv?api_key=${key}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${count}&with_watch_monetization_types=flatrate`)
             .then(function(response){
                 return response.json();
             })
             .then(function(response){
-                let dataCopy = movieData;
+                let dataCopy = seriesData;
                 let allData = dataCopy.concat(response.results);
-                setMovieData(allData);
+                setSeriesData(allData);
                 setLoading(false);
             })
         }
@@ -56,9 +56,9 @@ function AllMovies(){
     const handleClick = (e) => {
         console.log(e.target);
         if(e.target.className === 'grid-item-poster'){
-            for(let i =0; i < movieData.length; i++){
-                if(movieData[i].id === parseInt(e.target.id)){
-                    setModalData(movieData[i]);
+            for(let i =0; i < seriesData.length; i++){
+                if(seriesData[i].id === parseInt(e.target.id)){
+                    setModalData(seriesData[i]);
                     setModalShowing(true);
                 }
             }
@@ -74,8 +74,8 @@ function AllMovies(){
             <Modal disabledBtn={false} modalData={modalData} modalShowing={modalShowing} onClick={modalClose}/>
             <h2 style={{color: 'white'}}>All Movies</h2>
 
-            {loading ? <p style={{color: 'white'}}>Loading..</p> : <><div className='all-movies-grid'>
-                {movieData && movieData.map(item => <img key={item.id} onClick={e => handleClick(e)} id={item.id} className='grid-item-poster' src={'https://image.tmdb.org/t/p/original' + item.poster_path}/>)}
+            {loading ? <p style={{color: 'white'}}>Loading...</p> : <><div className='all-movies-grid'>
+                {seriesData && seriesData.map(item => <img key={item.id} onClick={e => handleClick(e)} id={item.id} className='grid-item-poster' src={'https://image.tmdb.org/t/p/original' + item.poster_path}/>)}
             </div>
 
             <div className='all-movies-btn-container'>
@@ -87,4 +87,4 @@ function AllMovies(){
         </>
     );
 }
-export default AllMovies;
+export default AllSeries;

@@ -9,7 +9,7 @@ function ActorCard(props){
         <div className='card-div'>
             {!props.data.profile_path ? <img src={placeholderAvatar}/> : <img src={`https://image.tmdb.org/t/p/original${props.data.profile_path}`}/>}
             <div className='p-div' id='actor-name'>
-                {props.data.name.split(' ').map(name => <p>{name}</p>)}
+                {props.data.name.split(' ').map(name => <p key={name}>{name}</p>)}
             </div>
         </div>
     );

@@ -33,9 +33,7 @@
     transform: scale(0.9);
 }
 .trailerBtn{
-    margin: 0.5rem 0.5rem 0 0.5rem;
-    margin-left: 0.5rem;
-    margin-right: 0.5rem;
+    margin: 0 0.125rem 0 0.125rem;
     background-color: orange;
     border: none;
     border-radius: 5px;
@@ -45,16 +43,26 @@
     color: black;
 }
 .watchBtn{
+    margin: 0 0.125rem 0 0.125rem;
     cursor: pointer;
     font-size: 16px;
     margin-top: 0.5rem;
-    margin-left: .5rem;
     background-color: orange;
     border: none;
     border-radius: 5px;
     padding: 0.25rem 0.5rem;
 }
-.trailerBtn:active, .watchBtn:active{
+.addToList{
+    margin: 0 0.125rem 0 0.125rem;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 0.5rem;
+    background-color: orange;
+    border: none;
+    border-radius: 5px;
+    padding: 0.25rem 0.5rem;
+}
+.trailerBtn:active, .watchBtn:active, .addToList:active{
     transform: scale(0.98);
 }
 .modal-content img{

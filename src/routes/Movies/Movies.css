@@ -43,26 +43,18 @@
     text-align: center;
     margin: 2rem auto;
 }
-.view-all-btn{
+.show-more-btn{
+    border: none;
+    text-decoration: underline;
     cursor: pointer;
-    background-color: transparent;
     color: white;
-    border-left: none;
-    border-right: none;
-    border-top: none;
-    border-bottom: solid transparent 2px;
-    font-size: 20px;
-    font-weight: 500;
-    padding: 0.5rem;
-    opacity: 40%;
-    transition: border-color 0.2s, opacity 0.2s;
+    background-color: transparent;
+    margin-bottom: 1rem;
+    transition: text-decoration-color 0.2s;
+    text-decoration-color: rgba(255,255,255, 0);
 }
-.view-all-btn:hover{
-    opacity: 100%;
-    border-color: white;
-}
-.view-all-btn:active{
-    transform: scale(0.95);
+.show-more-btn:hover{
+    text-decoration-color: rgba(255,255,255,100);
 }
 .jRFJkP:hover:enabled, .jRFJkP:focus:enabled{
     background-color: transparent !important;

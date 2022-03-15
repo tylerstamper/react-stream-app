@@ -153,7 +153,7 @@ export default function Movies(){
                     </div>
 
                     <div className='view-all-btn-container'>
-                        <Link className='view-all-btn' to='/movies-all'>All Movies</Link>
+                        <Link className='show-more-btn' to='/movies-all'>All Movies</Link>
                     </div>
                 </main>
                 <Footer/>

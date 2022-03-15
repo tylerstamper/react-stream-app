@@ -9,14 +9,18 @@ import StreamItem from '../../Components/StreamItem/StreamItem';
 
 export default function Home() {
 
-    const [data, setData] = useState();
+    const [num1trending, setNum1Trending] = useState();
+    const [trendingMovies, setTrendingMovies] = useState();
+    const [topRatedMovies, setTopRatedMovies] = useState();
+    const [trendingTV, setTrendingTV] = useState();
+    const [topRatedTV, setTopRatedTV] = useState();
+    const [myList, setMyList] = useState();
+
 
     //modal
     const [modalData, setModalData] =  useState();
     const [modalDataCast, setModalDataCast] = useState();
     const [modalShowing, setModalShowing] = useState(false);
-    const [num1trending, setNum1Trending] = useState();
-    const [trending, setTrending] = useState();
 
     const breakPoints = [
         { width: 1, itemsToShow: 3, itemsToScroll: 3 },
@@ -33,23 +37,66 @@ export default function Home() {
         if(modalData){
             getCast();
         }
-    }, [modalData, data])
+    }, [modalData])
 
     const getPageData = () => {
-        if(!data){
-            fetch(`https://api.themoviedb.org/3/trending/all/day?api_key=${key}`)
+        getTrendingMovies();
+        getTrendingTV();
+        getTopRatedMovies();
+        getTopRatedTV();
+    }
+
+    const getTrendingMovies = () => {
+        if(!trendingMovies){
+            fetch(`https://api.themoviedb.org/3/trending/movie/day?api_key=${key}`)
             .then(function(response){
                 return response.json();
             })
             .then(function(response){
-                dataDistributor(response);
+                distributeTrendingMovies(response);
             })
         }
     }
 
-    const dataDistributor = (response) => {
+    const getTrendingTV = () => {
+        if(!trendingTV){
+            fetch(`https://api.themoviedb.org/3/trending/tv/day?api_key=${key}`)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(response){
+                setTrendingTV(response.results);
+            })
+        }
+    }
+
+    const getTopRatedMovies = () => {
+        if(!topRatedMovies){
+            fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&langauge=en-US&page=1`)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(response){
+                setTopRatedMovies(response.results);
+            })
+        }
+    }
+
+    const getTopRatedTV = () => {
+        if(!topRatedTV){
+            fetch(`https://api.themoviedb.org/3/tv/top_rated?api_key=${key}&langauge=en-US&page=1`)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(response){
+                setTopRatedTV(response.results);
+            })
+        }
+    }
+
+    const distributeTrendingMovies = (response) => {
         setNum1Trending(response.results[0]);
-        setTrending(response.results);
+        setTrendingMovies(response.results);
     }
 
     const handleClick = (props) => {
@@ -90,38 +137,43 @@ export default function Home() {
 
         <Modal disabledBtn={false} modalData={modalData} castData={modalDataCast} modalShowing={modalShowing} onClick={modalClose}/>
                 <h2 className='page-title'>MOVIES</h2>
-                    <div className='div-container action' id='action'>
-                        <h3>ACTION MOVIES</h3>
+                    <div className='div-container action' id='my-list'>
+                        <h3>My List</h3>
+                    {myList ? 
+                        <Carousel breakPoints={breakPoints}>
+                            {myList && myList.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        </Carousel>
+                    :
+                        <div className='empty-list'>
+                            <h4>Your List is Empty</h4>
+                        </div>}
+                    </div>
+
+                    <div className='div-container action' id='trending-movies'>
+                        <h3>TRENDING MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trendingMovies && trendingMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
-                    <div className='div-container action' id='action'>
-                        <h3>ACTION MOVIES</h3>
+                    <div className='div-container action' id='trending-series'>
+                        <h3>TRENDING SERIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trendingTV && trendingTV.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
-                    <div className='div-container action' id='action'>
-                        <h3>ACTION MOVIES</h3>
+                    <div className='div-container action' id='top-rated-movies'>
+                        <h3>TOP RATED MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {topRatedMovies && topRatedMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
-                    <div className='div-container action' id='action'>
-                        <h3>ACTION MOVIES</h3>
+                    <div className='div-container action' id='top-rated-tv'>
+                        <h3>TOP RATED SERIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
-                    </Carousel>
-                    </div>
-
-                    <div className='div-container action' id='action'>
-                        <h3>ACTION MOVIES</h3>
-                    <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {topRatedTV && topRatedTV.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
         </main>

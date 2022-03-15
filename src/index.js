@@ -6,6 +6,7 @@ import Home from './routes/Home/Home';
 import Movies from './routes/Movies/Movies';
 import Series from './routes/Series/Series';
 import AllMovies from './routes/AllMovies/AllMovies';
+import AllSeries from './routes/AllSeries/AllSeries';
 import SearchResults from './routes/SearchResults/SearchResults';
 
 ReactDOM.render(
@@ -15,6 +16,7 @@ ReactDOM.render(
       <Route path="movies" element={<Movies />} />
       <Route path="series" element={<Series />} />
       <Route path="movies-all" element={<AllMovies />} />
+      <Route path="series-all" element={<AllSeries />} />
       <Route path="search-results" element={<SearchResults/>} />
     </Routes>
   </BrowserRouter>,

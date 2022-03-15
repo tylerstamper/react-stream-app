@@ -5,6 +5,8 @@ import Carousel from 'react-elastic-carousel';
 import Modal from '../../Components/Modal/Modal';
 import Footer from '../../Components/Footer/Footer';
 import StreamItem from '../../Components/StreamItem/StreamItem';
+import { Link } from 'react-router-dom';
+import '../Movies/Movies.css';
 //styles shared from movies page
 
 function Series(){
@@ -166,7 +168,7 @@ function Series(){
                 </div>
 
                 <div className='view-all-btn-container'>
-                    <button className='view-all-btn' onClick={e => alert('make pagination function to show page lists of series')}>View All</button>
+                        <Link className='show-more-btn' to='/series-all'>All Series</Link>
                 </div>
         </main>
         <Footer/>

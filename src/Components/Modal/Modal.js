@@ -36,6 +36,34 @@ function Modal(props){
         })
     }
 
+    // list create functions for modal -- must setup authentication --
+    // const addToList = async() => {
+    //     console.log(props.modalData.id);
+    //     await fetch(`https://api.themoviedb.org/3/account/1/watchlist?api_key=${key}`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Accept': 'application/json',
+    //             'Content-Type': 'application/json'
+    //           },
+    //           body: JSON.stringify({
+    //             "media_type": props.modalData.media_type,
+    //             "media_id": props.modalData.id,
+    //             "watchlist": true
+    //           })
+    //     })
+    //     getList();
+    // }
+
+    // const getList = () => {
+    //     fetch(`https://api.themoviedb.org/3/account/1/watchlist/movies?api_key=${key}&language=en-US&sort_by=created_at.asc&page=1`)
+    //     .then(function(response){
+    //         return response.json();
+    //     })
+    //     .then(function(response){
+    //         console.log(response);
+    //     })
+    // }
+
     const movieOrSeries = () => {
         if('original_title' in props.modalData){
             return props.modalData.original_title;
@@ -61,6 +89,7 @@ function Modal(props){
                 <img src={props.modalData && 'https://image.tmdb.org/t/p/original' + props.modalData.backdrop_path}/>
                 { props.disabledBtn ? <></> : <a className='trailerBtn' href={link && link} target='_blank'>Trailer</a>}
                 <button className='watchBtn'>Watch Now</button>
+                <button className='addToList' onClick={() => alert('this should call addToList() when auth is ready')} >Add to Watchlist</button>
                 <p className='modal-data-overview'>{props.modalData && props.modalData.overview}</p>
                 <div className='modal-extra-details'>
                     <p>Average Rating: {props.modalData && props.modalData.vote_average}/10</p>
