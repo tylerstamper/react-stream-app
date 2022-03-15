@@ -1,0 +1,68 @@
+.div-nav-container{
+    padding: 1rem;
+    border-bottom: 1px solid white;
+    width: 80%;
+    margin: auto;
+}
+.nav-main{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+.nav-main .link{
+    color: white;
+    font-size: 20px;
+    font-weight: 200;
+}
+.nav-main .link:hover{
+    font-weight: 600;
+}
+.nav-h2{
+    margin-bottom: 0.5rem;
+    text-align: center;
+    width: 100%;
+    display: block;
+    color: white;
+    font-weight: 500;
+    margin: 0 auto 1rem auto;
+}
+.link{
+    text-decoration: none;
+}
+.avatar-container{
+    height: 50px;
+}
+.avatar-container img{
+    height: 100%;
+    border-radius: 50%;
+}
+.search-container{
+    padding: 0.25rem;
+    border-radius: 5px;
+    margin-left: auto;
+    display: flex;
+    justify-content: end;
+    background-color: white;
+}
+.search-input{
+    height: 1.5rem;
+    border: none;
+    width: auto;
+}
+.search-input:focus{
+    outline: none;
+}
+.search-icon{
+    height: 1.5rem;
+}
+@media only screen and (max-width: 450px){
+    .nav-main .link{
+        font-size: 16px;
+    }
+    .nav-main{
+        gap: 0.5rem;
+    }
+}

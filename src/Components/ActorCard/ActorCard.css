@@ -1,0 +1,22 @@
+.card-div{
+    margin: 0 0.5rem;
+}
+.card-div img{
+    height: 8rem;
+    margin: 0;
+    display: block;
+}
+.card-div .p-div{
+    margin: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 6rem;
+    height: 4rem;
+    color: white;
+    background-color: black;
+}
+.card-div .p-div p{
+    margin: 0;
+}

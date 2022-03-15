@@ -1,0 +1,33 @@
+.footer{
+    padding: 1rem 1rem 0.25rem 1rem;
+    margin-top: 2rem;
+    background-color: rgba(128, 128, 128, 20%);
+}
+.footer-content-div{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+footer img{
+    height: 2rem;
+    margin: 0.5rem;
+}
+footer .div-socials img{
+    cursor: pointer;
+}
+.footer-div-about{
+    margin: auto;
+    color: white;
+}
+.footer-div-about h6{
+    font-size: 1rem;
+    margin: 0.25rem auto;
+}
+footer .copy{
+    color: rgba(255,255,255, 50%);
+}
+.footer-div-about ul{
+    margin: 0 auto;
+    padding: initial;
+    list-style: none;
+}

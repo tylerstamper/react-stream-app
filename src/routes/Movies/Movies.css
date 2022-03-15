@@ -1,0 +1,80 @@
+.page-title{
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    margin: 2rem 0;
+}
+.div-container h3{
+    color: white;
+    font-weight: 300;
+    font-size: 28px;
+}
+.movie-poster{
+    width: 90%;
+    transform: scale(1);
+    transition: transform 0.2s;
+}
+.movie-poster:hover{
+    transform: scale(1.1);
+}
+.div-container h3{
+    margin-left: 60px;
+}
+.div-container{
+    margin: auto;
+    position: relative;
+}
+/* Carousel */
+.rec.rec-arrow{
+    font-size: 1rem;
+    height: 10rem;
+    box-shadow: none;
+    border-radius: 0;
+    background: none;
+}
+.rec.rec-arrow:disabled{
+    color: transparent;
+}
+.rec.rec-pagination{
+    display: none;
+}
+.view-all-btn-container{
+    text-align: center;
+    margin: 2rem auto;
+}
+.view-all-btn{
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom: solid transparent 2px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0.5rem;
+    opacity: 40%;
+    transition: border-color 0.2s, opacity 0.2s;
+}
+.view-all-btn:hover{
+    opacity: 100%;
+    border-color: white;
+}
+.view-all-btn:active{
+    transform: scale(0.95);
+}
+.jRFJkP:hover:enabled, .jRFJkP:focus:enabled{
+    background-color: transparent !important;
+    box-shadow: none !important;
+}
+@media only screen and (max-width: 900px){
+    .div-container h3{
+        font-size: 24px;
+    }
+}
+@media only screen and (max-width: 550px){
+    .div-container h3{
+        font-size: 20px;
+    }
+}
