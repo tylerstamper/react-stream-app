@@ -6,6 +6,7 @@ import { useState } from 'react';
 import Modal from '../../Components/Modal/Modal';
 import key from '../../key';
 import confused from '../../Assets/confused.gif';
+import StreamItem from '../../Components/StreamItem/StreamItem';
 
 function SearchResults(){
     const { state } = useLocation();
@@ -24,14 +25,9 @@ function SearchResults(){
 
     console.log(state);
 
-    const handleClick = (e) => {
-        for(let i = 0; i < state.response.length; i++){
-            if(state.response[i].id === parseInt(e.target.id)){
-                setModalData(state.response[i]);
-                setModalShowing(true);
-                setEvent(e);
-            }
-        }
+    const handleClick = (props) => {
+        setModalData(props.itemProps);
+        setModalShowing(true);
     }
 
     const getCast = (e) => {
@@ -88,12 +84,8 @@ function SearchResults(){
                     </div>
                     :
                     <div className='grid-div-results'>
-                    {state.response.map(item => 
-                    !item.poster_path ? 
-                    <></>
-                    :
-                    <img onClick={e =>handleClick(e)} media-type={item.media_type} id={item.id} className='grid-item' src={`https://image.tmdb.org/t/p/original${item.poster_path}`}/>)}
-                </div>}
+                        {state.response.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                    </div>}
             </main>
         </>
     );

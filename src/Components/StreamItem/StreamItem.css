@@ -1,0 +1,17 @@
+.rec.rec-carousel-item{
+    height: 100%;
+    display: flex;
+}
+.no-poster-div{
+    width: 90%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #34ace0;
+    transform: scale(1);
+    transition: transform 0.2s;
+}
+.no-poster-div:hover{
+    transform: scale(1.1);
+}

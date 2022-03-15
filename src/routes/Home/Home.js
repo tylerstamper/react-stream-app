@@ -93,35 +93,35 @@ export default function Home() {
                     <div className='div-container action' id='action'>
                         <h3>ACTION MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map(item => <StreamItem onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container action' id='action'>
                         <h3>ACTION MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map(item => <StreamItem onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container action' id='action'>
                         <h3>ACTION MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map(item => <StreamItem onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container action' id='action'>
                         <h3>ACTION MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map(item => <StreamItem onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container action' id='action'>
                         <h3>ACTION MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trending && trending.map(item => <StreamItem onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trending && trending.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
         </main>

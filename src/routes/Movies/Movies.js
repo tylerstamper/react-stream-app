@@ -93,40 +93,9 @@ export default function Movies(){
         }
     } 
 
-    const handleClick = (e) => {
-        const genre = e.target.getAttribute('from-genre-list');
-        if(genre === 'action'){
-            for(let i = 0; i < actionMovies.length; i++){
-                if(actionMovies[i].id === parseInt(e.target.id)){
-                    setModalData(actionMovies[i]);
-                    setModalShowing(true);
-                }
-            }
-        }
-        if(genre === 'adventure'){
-            for(let i = 0; i < adventureMovies.length; i++){
-                if(adventureMovies[i].id === parseInt(e.target.id)){
-                    setModalData(adventureMovies[i]);
-                    setModalShowing(true);
-                }
-            }
-        }
-        if(genre === 'comedy'){
-            for(let i = 0; i < comedyMovies.length; i++){
-                if(comedyMovies[i].id === parseInt(e.target.id)){
-                    setModalData(comedyMovies[i]);
-                    setModalShowing(true);
-                }
-            }
-        }
-        if(genre === 'thriller'){
-            for(let i = 0; i < thrillerMovies.length; i++){
-                if(thrillerMovies[i].id === parseInt(e.target.id)){
-                    setModalData(thrillerMovies[i]);
-                    setModalShowing(true);
-                }
-            }
-        }
+    const handleClick = (props) => {
+        setModalData(props.itemProps);
+        setModalShowing(true);
     }
 
     const getCast = () => {
@@ -158,34 +127,28 @@ export default function Movies(){
                     <div className='div-container action' id='action'>
                         <h3>ACTION MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {actionMovies && actionMovies.map(item => <StreamItem onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {actionMovies && actionMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container adventure' id='adventure'>
                         <h3>ADVENTURE MOVIES</h3>
                         <Carousel breakPoints={breakPoints}>
-                            {adventureMovies && adventureMovies.map(item => {
-                                return <img from-genre-list={'adventure'} onClick={e => handleClick(e)} id={item.id} className='movie-poster' key={item.id} src={'https://image.tmdb.org/t/p/original' + item.poster_path}/>
-                            })}
+                            {adventureMovies && adventureMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                         </Carousel>
                     </div>
 
                     <div className='div-container comedy' id='comedies'>
                         <h3>COMEDIES</h3>
                         <Carousel breakPoints={breakPoints}>
-                            {comedyMovies && comedyMovies.map(item => {
-                                return <img from-genre-list={'comedy'} onClick={e => handleClick(e)} id={item.id} className='movie-poster' key={item.id} src={'https://image.tmdb.org/t/p/original' + item.poster_path}/>
-                            })}
+                            {comedyMovies && comedyMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                         </Carousel>
                     </div>
 
                     <div className='div-container thriller' id='thrillers'>
                         <h3>THRILLERS</h3>
                         <Carousel breakPoints={breakPoints}>
-                            {thrillerMovies && thrillerMovies.map(item => {
-                                return <img from-genre-list={'thriller'} onClick={e => handleClick(e)} id={item.id} className='movie-poster' key={item.id} src={'https://image.tmdb.org/t/p/original' + item.poster_path}/>
-                            })}
+                            {thrillerMovies && thrillerMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
                         </Carousel>
                     </div>
 
