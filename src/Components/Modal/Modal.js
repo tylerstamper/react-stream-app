@@ -10,9 +10,7 @@ function Modal(props){
     const [castShowing, setCastShowing] = useState(false);
 
     useEffect(() => {
-        if(props.modalData){
-            console.log(props);
-        }else{
+        if(!props.modalData){
             return;
         }
     }, [props.modalData])
@@ -22,6 +20,7 @@ function Modal(props){
     }
 
     const fetchLink = () => {
+        console.log('linked clicked')
         fetch(`https://api.themoviedb.org/3/movie/${props.modalData.id}/videos?api_key=${key}&language=en-US`)
         .then(function(response){
             return response.json();
@@ -30,7 +29,7 @@ function Modal(props){
             for(let i= 0; i < response.results.length; i++){
                 if(response.results[i].name === 'Official Trailer'){
                     console.log(response.results[i].key);
-                    setLink('https://www.youtube.com/watch?v=' + response.results[i].key);
+                    window.open(`https://www.youtube.com/watch?v=${response.results[i].key}`, '_blank');
                 }
             }
         })
@@ -87,7 +86,7 @@ function Modal(props){
                 <h2 className='modal-data-title'>{props.modalData && movieOrSeries()}</h2>
                 <button className='closeBtn' onClick={handleClick}>X</button>
                 <img src={props.modalData && 'https://image.tmdb.org/t/p/original' + props.modalData.backdrop_path}/>
-                { props.disabledBtn ? <></> : <a className='trailerBtn' href={link && link} target='_blank'>Trailer</a>}
+                <button className='trailerBtn' onClick={() => fetchLink()}>Trailer</button>
                 <button className='watchBtn'>Watch Now</button>
                 <button className='addToList' onClick={() => alert('this should call addToList() when auth is ready')} >Add to Watchlist</button>
                 <p className='modal-data-overview'>{props.modalData && props.modalData.overview}</p>

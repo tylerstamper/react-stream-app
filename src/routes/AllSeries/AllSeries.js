@@ -4,6 +4,7 @@ import key from '../../key';
 import { useEffect, useState, useRef } from 'react';
 import Modal from '../../Components/Modal/Modal';
 import Footer from '../../Components/Footer/Footer';
+import StreamItem from '../../Components/StreamItem/StreamItem';
 
 function AllSeries(){
 
@@ -14,6 +15,7 @@ function AllSeries(){
     //modal
     const [modalShowing, setModalShowing] = useState(false);
     const [modalData, setModalData] = useState();
+    const [modalDataCast, setModalDataCast] = useState();
 
     useEffect(() => {
         getSeriesList();
@@ -53,29 +55,31 @@ function AllSeries(){
         }
     }
 
-    const handleClick = (e) => {
-        console.log(e.target);
-        if(e.target.className === 'grid-item-poster'){
-            for(let i =0; i < seriesData.length; i++){
-                if(seriesData[i].id === parseInt(e.target.id)){
-                    setModalData(seriesData[i]);
-                    setModalShowing(true);
-                }
-            }
-        } else if(e.target.className === 'show-more-btn'){
-            setCount(count + 1);
-        }
+    const handleClick = (props) => {
+        setModalData(props.itemProps);
+        getCast(props.itemProps);
+        setModalShowing(true);
+    }
+
+    const getCast = (props) => {
+        fetch(`https://api.themoviedb.org/3/tv/${props.id}/credits?api_key=${key}&language=en-US`)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(response){
+            setModalDataCast(response);
+        })
     }
 
     return(
         <>
         <main className='all-movies'>
             <Nav/>
-            <Modal disabledBtn={false} modalData={modalData} modalShowing={modalShowing} onClick={modalClose}/>
+            <Modal disabledBtn={false} modalData={modalData} castData={modalDataCast} modalShowing={modalShowing} onClick={modalClose}/>
             <h2 style={{color: 'white'}}>All Movies</h2>
 
             {loading ? <p style={{color: 'white'}}>Loading...</p> : <><div className='all-movies-grid'>
-                {seriesData && seriesData.map(item => <img key={item.id} onClick={e => handleClick(e)} id={item.id} className='grid-item-poster' src={'https://image.tmdb.org/t/p/original' + item.poster_path}/>)}
+                {seriesData && seriesData.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item}/>)}
             </div>
 
             <div className='all-movies-btn-container'>

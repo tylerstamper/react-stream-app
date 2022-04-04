@@ -36,13 +36,10 @@ function Series(){
         gatherSeriesReality();
         gatherSeriesAnimation();
         gatherSeriesScifi();
-        if(modalData){
-            getCast();
-        }
     }, [])
 
-    const getCast = () => {
-        fetch(`https://api.themoviedb.org/3/tv/${modalData.id}/credits?api_key=${key}&language=en-US`)
+    const getCast = (props) => {
+        fetch(`https://api.themoviedb.org/3/tv/${props.id}/credits?api_key=${key}&language=en-US`)
         .then(function(response){
             return response.json();
         })
@@ -53,6 +50,7 @@ function Series(){
 
     const handleClick = (props) => {
         setModalData(props.itemProps);
+        getCast(props.itemProps);
         setModalShowing(true);
     }
 

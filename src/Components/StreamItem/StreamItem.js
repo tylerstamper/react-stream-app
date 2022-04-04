@@ -1,11 +1,7 @@
-import { useEffect, useState } from 'react';
 import './StreamItem.css';
 
 function StreamItem(props) {
 
-
-    useEffect(() => {
-    }, [])
 
     const handleClick = () => {
         props.onClick(props);

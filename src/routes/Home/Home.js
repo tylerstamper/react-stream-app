@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-elastic-carousel';
 import Nav from '../../Components/Nav/Nav';
 import './Home.css';
@@ -15,6 +16,7 @@ export default function Home() {
     const [trendingTV, setTrendingTV] = useState();
     const [topRatedTV, setTopRatedTV] = useState();
     const [myList, setMyList] = useState();
+    const navigate = useNavigate();
 
 
     //modal
@@ -34,9 +36,6 @@ export default function Home() {
 
     useEffect(() => {
         getPageData();
-        if(modalData){
-            getCast();
-        }
     }, [modalData])
 
     const getPageData = () => {
@@ -99,14 +98,14 @@ export default function Home() {
         setTrendingMovies(response.results);
     }
 
-    const handleClick = (props) => {
+    const handleClick = (props, mediaType) => {
         setModalData(props.itemProps);
+        getCast(props.itemProps, mediaType);
         setModalShowing(true);
     }
 
-    const getCast = () => {
-        let type = modalData.media_type;
-        fetch(`https://api.themoviedb.org/3/${type}/${modalData.id}/credits?api_key=${key}&language=en-US`)
+    const getCast = (props, mediaType) => {
+        fetch(`https://api.themoviedb.org/3/${mediaType}/${props.id}/credits?api_key=${key}&language=en-US`)
         .then(function(response){
             return response.json();
         })
@@ -152,28 +151,28 @@ export default function Home() {
                     <div className='div-container action' id='trending-movies'>
                         <h3>TRENDING MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trendingMovies && trendingMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trendingMovies && trendingMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props, 'movie')} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container action' id='trending-series'>
                         <h3>TRENDING SERIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {trendingTV && trendingTV.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {trendingTV && trendingTV.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props, 'tv')} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container action' id='top-rated-movies'>
                         <h3>TOP RATED MOVIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {topRatedMovies && topRatedMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {topRatedMovies && topRatedMovies.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props, 'movie')} itemProps={item} />)}
                     </Carousel>
                     </div>
 
                     <div className='div-container action' id='top-rated-tv'>
                         <h3>TOP RATED SERIES</h3>
                     <Carousel breakPoints={breakPoints}>
-                        {topRatedTV && topRatedTV.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props)} itemProps={item} />)}
+                        {topRatedTV && topRatedTV.map((item, index) => <StreamItem key={index} onClick={(props) => handleClick(props, 'tv')} itemProps={item} />)}
                     </Carousel>
                     </div>
         </main>

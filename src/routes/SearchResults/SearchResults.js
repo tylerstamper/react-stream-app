@@ -27,13 +27,28 @@ function SearchResults(){
 
     const handleClick = (props) => {
         setModalData(props.itemProps);
+        getCast(props.itemProps);
         setModalShowing(true);
     }
 
-    const getCast = (e) => {
-        let type = e.target.getAttribute('media-type');
+    const hasNoPoster = () => {
+        let found = false;
+        for(let i = 0; i < state.response.length; i++){
+            if(state.response[i].hasOwnProperty('poster_path') && state.response[i].poster_path !== null){
+                found = true
+            }
+            else{
+                console.log('not found')
+            }
+        }
+        return found;
+    }
+
+    const getCast = (props) => {
+        console.log(props);
+        let type = props.media_type;
         if(type === 'movie'){
-            fetch(`https://api.themoviedb.org/3/movie/${modalData.id}/credits?api_key=${key}&language=en-US`)
+            fetch(`https://api.themoviedb.org/3/movie/${props.id}/credits?api_key=${key}&language=en-US`)
             .then(function(response){
                 return response.json();
             })
@@ -42,7 +57,7 @@ function SearchResults(){
             })
         }
         else if(type === 'tv'){
-            fetch(`https://api.themoviedb.org/3/tv/${modalData.id}/credits?api_key=${key}&language=en-US`)
+            fetch(`https://api.themoviedb.org/3/tv/${props.id}/credits?api_key=${key}&language=en-US`)
             .then(function(response){
                 return response.json();
             })
@@ -51,7 +66,7 @@ function SearchResults(){
             })
         }
         else{
-            fetch(`https://api.themoviedb.org/3/person/${modalData.id}/credits?api_key=${key}&language=en-US`)
+            fetch(`https://api.themoviedb.org/3/person/${props.id}/credits?api_key=${key}&language=en-US`)
             .then(function(response){
                 return response.json();
             })
@@ -77,7 +92,7 @@ function SearchResults(){
             <Modal disabledBtn={false} modalData={modalData} castData={modalDataCast} modalShowing={modalShowing} onClick={modalClose}/>
             <main>
                 <h1 style={{color: 'white', textAlign: 'center'}}>Search Page</h1>
-                {state.response.length === 0 ?
+                {state.response.length === 0 || !hasNoPoster() ?
                     <div className='search-results-none'>
                         <h2>Sorry.. We couldnt find <span style={{fontStyle: 'italic', textDecoration: 'underline', fontSize: '0.9em', fontWeight: '500'}}>{state.query}</span></h2>
                         <img alt='confused gif' src={confused}/>
